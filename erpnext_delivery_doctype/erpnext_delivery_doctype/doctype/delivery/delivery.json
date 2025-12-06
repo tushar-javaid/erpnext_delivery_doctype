@@ -1,0 +1,342 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2025-12-02 12:42:43.992133",
+ "custom": 1,
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_hz3r",
+  "amended_from",
+  "naming_series",
+  "customer",
+  "stock_entry_type",
+  "column_break_ugbh",
+  "posting_date",
+  "posting_time",
+  "set_posting_time",
+  "column_break_ttuk",
+  "company",
+  "transfer_modes",
+  "default_warehouse_section",
+  "from_warehouse",
+  "column_break_xpkj",
+  "to_warehouse",
+  "se_items_section",
+  "se_items",
+  "dn_items_section",
+  "dn_items",
+  "total_section",
+  "total_qty",
+  "column_break_jost",
+  "total_package",
+  "column_break_udip",
+  "total",
+  "taxes_and_charges_section",
+  "taxes",
+  "more_info_tab",
+  "transporter_info_section",
+  "transporter",
+  "driver",
+  "lr_no",
+  "vehicle_no",
+  "paid_freight",
+  "column_break_uipw",
+  "transporter_name",
+  "driver_name",
+  "lr_date",
+  "total_freight",
+  "freight_balance"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_hz3r",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Delivery",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Series",
+   "options": "MAT-DEL-.YYYY.-",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.transfer_modes=='External Delivery'",
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "mandatory_depends_on": "eval:doc.transfer_modes=='External Delivery'",
+   "options": "Customer"
+  },
+  {
+   "depends_on": "eval:doc.transfer_modes=='Internal Transfer'",
+   "fieldname": "stock_entry_type",
+   "fieldtype": "Link",
+   "label": "Stock Entry Type",
+   "mandatory_depends_on": "eval:doc.transfer_modes=='Internal Transfer'",
+   "options": "Stock Entry Type"
+  },
+  {
+   "fieldname": "column_break_ugbh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date",
+   "no_copy": 1,
+   "reqd": 1
+  },
+  {
+   "default": "Now",
+   "fieldname": "posting_time",
+   "fieldtype": "Time",
+   "label": "Posting Time",
+   "print_hide": 1,
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.docstatus==0",
+   "fieldname": "set_posting_time",
+   "fieldtype": "Check",
+   "label": "Edit Posting Date and Time",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "column_break_ttuk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "transfer_modes",
+   "fieldtype": "Select",
+   "label": "Transfer Modes",
+   "options": "\nExternal Delivery\nInternal Transfer",
+   "reqd": 1
+  },
+  {
+   "collapsible": 1,
+   "depends_on": "eval:doc.transfer_modes=='Internal Transfer'",
+   "fieldname": "default_warehouse_section",
+   "fieldtype": "Section Break",
+   "label": "Default Warehouse"
+  },
+  {
+   "description": "Sets 'Source Warehouse' in each row of the items table.",
+   "fieldname": "from_warehouse",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Default Source Warehouse",
+   "no_copy": 1,
+   "options": "Warehouse",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "column_break_xpkj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Sets 'Target Warehouse' in each row of the items table.",
+   "fieldname": "to_warehouse",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Default Target Warehouse",
+   "no_copy": 1,
+   "options": "Warehouse",
+   "print_hide": 1
+  },
+  {
+   "depends_on": "eval:doc.transfer_modes=='Internal Transfer'",
+   "fieldname": "se_items_section",
+   "fieldtype": "Section Break",
+   "label": "Items"
+  },
+  {
+   "fieldname": "se_items",
+   "fieldtype": "Table",
+   "label": "Stock Entry Items",
+   "options": "Stock Entry Detail"
+  },
+  {
+   "depends_on": "eval:doc.transfer_modes=='External Delivery'",
+   "fieldname": "dn_items_section",
+   "fieldtype": "Section Break",
+   "label": "Items"
+  },
+  {
+   "fieldname": "dn_items",
+   "fieldtype": "Table",
+   "label": "Delivery Note Items",
+   "options": "Delivery Note Item"
+  },
+  {
+   "fieldname": "total_section",
+   "fieldtype": "Section Break",
+   "label": "Total"
+  },
+  {
+   "fieldname": "total_qty",
+   "fieldtype": "Float",
+   "label": "Total Quantity",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_jost",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_package",
+   "fieldtype": "Int",
+   "label": "Total Package",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_udip",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total",
+   "fieldtype": "Currency",
+   "label": "Total",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.transfer_modes=='External Delivery'",
+   "fieldname": "taxes_and_charges_section",
+   "fieldtype": "Section Break",
+   "label": "Taxes and Charges"
+  },
+  {
+   "fieldname": "taxes",
+   "fieldtype": "Table",
+   "label": "Sales Taxes and Charges",
+   "options": "Sales Taxes and Charges"
+  },
+  {
+   "fieldname": "more_info_tab",
+   "fieldtype": "Tab Break",
+   "label": "More Info",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "transporter_info_section",
+   "fieldtype": "Section Break",
+   "label": "Transporter Info"
+  },
+  {
+   "fieldname": "transporter",
+   "fieldtype": "Link",
+   "label": "Transporter",
+   "options": "Supplier"
+  },
+  {
+   "fieldname": "driver",
+   "fieldtype": "Link",
+   "label": "Driver",
+   "options": "Driver"
+  },
+  {
+   "fieldname": "lr_no",
+   "fieldtype": "Data",
+   "label": "Transport Receipt No",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "vehicle_no",
+   "fieldtype": "Data",
+   "label": "Vehicle No",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "paid_freight",
+   "fieldtype": "Int",
+   "label": "Paid Freight"
+  },
+  {
+   "fieldname": "column_break_uipw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "transporter.supplier_name",
+   "fieldname": "transporter_name",
+   "fieldtype": "Data",
+   "label": "Transporter Name",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fetch_from": "driver.full_name",
+   "fieldname": "driver_name",
+   "fieldtype": "Data",
+   "label": "Driver Name",
+   "print_hide": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "lr_date",
+   "fieldtype": "Date",
+   "label": "Transport Receipt Date",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "total_freight",
+   "fieldtype": "Int",
+   "label": "Total Freight"
+  },
+  {
+   "fieldname": "freight_balance",
+   "fieldtype": "Int",
+   "label": "Freight Balance"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-12-06 13:20:54.960834",
+ "modified_by": "asadalisandhu0@gmail.com",
+ "module": "ERPNext Delivery Doctype",
+ "name": "Delivery",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
